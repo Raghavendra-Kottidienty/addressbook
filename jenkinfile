@@ -29,6 +29,12 @@ parameters{
                 echo 'I am in Test'
                 echo "Testing phase"
                 sh 'mvn test'
+
+            }
+            post{
+                always{
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         }
         stage('Package') {

@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        tool 'mymaven'
+        maven 'mymaven'
     }
 
 parameters{

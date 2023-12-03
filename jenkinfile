@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     tools{
         maven 'mymaven'
     }
@@ -12,6 +12,7 @@ parameters{
 
     stages {
         stage('Compile') {
+            agent any
             steps {
                 echo 'I am in Compile'
                 echo "Compiling in ${params.Env}"
@@ -20,6 +21,7 @@ parameters{
         }
  
         stage('Test') {
+            agent any
             when{
                 expression{
                     params.executeTests == true
@@ -38,6 +40,10 @@ parameters{
             }
         }
         stage('Package') {
+            agent any
+           // agent{
+           //     label 'linux_slave'
+           //}
             input{
                 message "Select the app version"
                 ok "Version Selected"

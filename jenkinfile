@@ -7,7 +7,6 @@ parameters{
         choice(name:'APPVERSION',choices:['1.1','1.2','1.3'])
     }
 
-
     stages {
         stage('Compile') {
             steps {
@@ -28,6 +27,13 @@ parameters{
             }
         }
         stage('Package') {
+            input{
+                message "Select the app version"
+                ok "Version Selected"
+                parameters{
+                    choice(name:'NEWAPP',choices:['1.1','2.1','3.1'])
+                }
+            }
             steps {
                 echo 'Package'
                 echo "packaging versions ${params.APPVERSION}"
